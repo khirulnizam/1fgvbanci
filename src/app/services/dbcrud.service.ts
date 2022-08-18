@@ -92,7 +92,8 @@ export class DbcrudService {
     },(e) => {
       alert(JSON.stringify(e));
     });
-  }
+  }//getallpokok
+
   // Update
   updatepokok(nopokok, biltandan, catatan,statusupload) {
     let data = [nopokok, biltandan, catatan,statusupload];
@@ -109,5 +110,20 @@ export class DbcrudService {
       .catch(e => {
         alert(JSON.stringify(e))
       });
-  }
+  }//end deletepokok
+
+  datanotupload:Array<any>;//hold all record pokok
+  getdatabelumupload() {
+    return this.dbinstance.executeSql("SELECT * FROM tblbancipokok WHERE statusupload=0", []).then((res) => {
+      this.alldatapokok = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) {
+          this.alldatapokok.push(res.rows.item(i));
+        }
+        return this.alldatapokok;
+      }
+    },(e) => {
+      alert(JSON.stringify(e));
+    });
+  }//getallpokok
 }

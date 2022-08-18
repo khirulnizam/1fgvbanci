@@ -9,7 +9,7 @@ export class NetworkCheckerService {
   constructor() {}
 
   async openCheckNetwork() {
-    Network.addListener('networkStatusChange', (status) => {
+      Network.addListener('networkStatusChange', (status) => {
       console.log('Network status changed', status);
       this.onlineIndicator = status.connected;
     });

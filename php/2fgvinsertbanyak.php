@@ -11,16 +11,16 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include "connect.php";
 
 	//capture JSON data from IONIC form
-	$_POST = json_decode(file_get_contents('php://input'), true);
-	
-	//sql to insert new record to table orangasal
-	$query="INSERT IGNORE INTO bancipokok
-	(nopokok,biltandan,catatan) VALUES 
-    ('".$_POST['nopokok']."','".$_POST['biltandan'].
-	"','".$_POST['catatan']."')";
+	$array = json_decode(file_get_contents('php://input'), true); //Convert JSON String into PHP Array
+	foreach($array as $row) //Extract the Array Values by using Foreach Loop
+	{
+	 $query =$query. "INSERT IGNORE INTO bancipokok(nopokok, biltandan,catatan) 
+	 VALUES ('".$row["nopokok"]."', '".$row["biltandan"]."', '".$row["catatan"]."');";  // Make Multiple Insert Query 
+
+	}
 	//echo $query;
     //run  query
-    if(mysqli_query($db, $query)){
+    if(mysqli_multi_query($db, $query)){
 		//return as respond
         echo ("{\"success\":1}");
     }

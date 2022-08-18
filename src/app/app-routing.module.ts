@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'uploadmultirekod',
+    loadChildren: () => import('./uploadmultirekod/uploadmultirekod.module').then( m => m.UploadmultirekodPageModule)
+  },
 ];
 
 @NgModule({
