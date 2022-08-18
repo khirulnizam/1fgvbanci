@@ -114,13 +114,15 @@ export class DbcrudService {
 
   datanotupload:Array<any>;//hold all record pokok
   getdatabelumupload() {
-    return this.dbinstance.executeSql("SELECT * FROM tblbancipokok WHERE statusupload=0", []).then((res) => {
-      this.alldatapokok = [];
+    return this.dbinstance.executeSql("SELECT * FROM tblbancipokok WHERE statusupload='0'", []).then((res) => {
+      this.datanotupload = [];
+      alert("Bil data belum upload:"+res.rows.length);//semak bil rekod 
       if (res.rows.length > 0) {
+        
         for (var i = 0; i < res.rows.length; i++) {
-          this.alldatapokok.push(res.rows.item(i));
+          this.datanotupload.push(res.rows.item(i));
         }
-        return this.alldatapokok;
+        return this.datanotupload;
       }
     },(e) => {
       alert(JSON.stringify(e));
