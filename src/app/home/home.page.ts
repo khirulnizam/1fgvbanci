@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { NetworkCheckerService } from '../services/network-checker.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { DbcrudService } from '../services/dbcrud.service';
 
 @Component({
   selector: 'app-home',
@@ -16,14 +17,32 @@ export class HomePage {
   qrpokok:any;
 
   constructor(
+    private crud: DbcrudService,
     public formBuilder: FormBuilder,
     private http:HttpClient,
     private network: NetworkCheckerService
   ) {
+
     this.mainForm = this.formBuilder.group({
       nopokok: [''],//reset data form
       biltandan: [''],
-      catatan: [''],})
+      catatan: [''],});
+      
+  }
+
+  preparedb(){
+    this.crud.getallpokok();
+    alert(JSON.stringify(this.crud.alldatapokok));
+  }
+
+  insertrecordsqlite(){
+    this.crud.addpokok(this.mainForm.value.nopokok,
+      this.mainForm.value.biltandan, 
+      this.mainForm.value.catatan);
+      //chck network availability
+      //upload record
+      //if succes upload , update status upload
+      alert(JSON.stringify(this.crud.alldatapokok));
   }
 
   //handling qrcode-scanner
