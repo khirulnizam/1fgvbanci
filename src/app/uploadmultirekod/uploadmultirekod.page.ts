@@ -22,7 +22,7 @@ export class UploadmultirekodPage implements OnInit {
   }//
 
   headers:HttpHeaders;
-  urlinsertbanyak:any="https://khirulnizam.com/training/2fgvinsertusers.php";
+  urlinsertbanyak:any="https://khirulnizam.com/training/2fgvinsertbanyak.php";
   uploadrekods(){
     this.headers=new HttpHeaders();
     this.headers.append('ContentType','application/json');
